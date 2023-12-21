@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アパート住民コミュニティサイト</title>
+    <title>アパート住民コミュニティサイト - 住所検索結果</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -29,22 +29,17 @@
     </nav>
 
     <div class="container mt-4">
-        <h1>アパート住民コミュニティサイトへようこそ！</h1>
-        <p>このサイトでは、アパートの住民同士がコミュニケーションを取り合うことができます。</p>
+        <h1>住所検索結果</h1>
 
-        <div class="card mt-4">
-            <div class="card-header">住所検索</div>
-            <div class="card-body">
-                <form action="{{ route('property.index') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="address">住所を入力してください:</label>
-                        <input type="text" name="address" id="address" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">検索</button>
-                </form>
-            </div>
-        </div>
+        @if ($properties->count() > 0)
+            <ul>
+                @foreach ($properties as $property)
+                    <li>{{ $property->Address }} - {{ $property->PropertyName }}</li>
+                @endforeach
+            </ul>
+        @else
+            <p>該当する物件はありません。</p>
+        @endif
     </div>
 
     <!-- Bootstrap JS -->
